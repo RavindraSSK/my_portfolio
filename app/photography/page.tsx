@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import SectionHeader from '@/components/SectionHeader';
 import PhotographyGallery from '@/components/PhotographyGallery';
+import GalleryGrid from '@/components/GalleryGrid';
+import SectionHeader from '@/components/SectionHeader';
 import { photos } from '@/data/photos';
 
 export const metadata: Metadata = {
   title: 'Photography',
   description: 'A curated gallery of campus, sports, travel, and portrait photography.'
+  description: 'A curated gallery of landscape and travel photography.'
 };
 
 export default function PhotographyPage() {
@@ -20,6 +23,11 @@ export default function PhotographyPage() {
         <SectionHeader title="Recent Captures" subtitle="Filter by category and open any image in an interactive lightbox." />
         <p className="text-sm text-slate-500">Add images to /public/photos and update data/photos.ts.</p>
         <PhotographyGallery photos={photos} />
+        <p className="max-w-3xl text-slate-600">Visual notes from mountains, coastlines, and life on the move.</p>
+      </header>
+      <section>
+        <SectionHeader title="Recent Captures" subtitle="A responsive gallery showcasing sample image placeholders." />
+        <GalleryGrid images={photos} />
       </section>
     </div>
   );

@@ -34,6 +34,9 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
     return matchesFilter && matchesSearch;
   });
 
+  const visibleProjects =
+    selectedFilter === 'All' ? projects : projects.filter((project) => project.tags.includes(selectedFilter));
+
   return (
     <div className="space-y-10">
       <header className="space-y-3">
@@ -77,6 +80,11 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                 : `/academic-projects?filter=${encodeURIComponent(filter)}${
                     query ? `&q=${encodeURIComponent(query)}` : ''
                   }`;
+        <SectionHeader title="Project Highlights" subtitle="Filter by focus area and explore implementation details." />
+        <div className="flex flex-wrap gap-2">
+          {projectFilters.map((filter) => {
+            const isActive = selectedFilter === filter;
+            const href = filter === 'All' ? '/academic-projects' : `/academic-projects?filter=${encodeURIComponent(filter)}`;
 
             return (
               <Link
@@ -105,6 +113,9 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2">
                     <Badge label={project.category} />
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} label={tag} />
+                    ))}
                     {project.tech.map((item) => (
                       <Badge key={item} label={item} />
                     ))}
@@ -120,6 +131,20 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                     {project.links.github ? (
                       <Link
                         href={project.links.github}
+                    <dl className="grid grid-cols-2 gap-2 rounded-lg bg-slate-100 p-3">
+                      {project.metrics.map((metric) => (
+                        <div key={metric.label}>
+                          <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{metric.label}</dt>
+                          <dd className="text-sm font-semibold text-slate-800">{metric.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : null}
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.githubUrl ? (
+                      <Link
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
@@ -131,6 +156,9 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                     {project.links.demo ? (
                       <Link
                         href={project.links.demo}
+                    {project.liveDemoUrl ? (
+                      <Link
+                        href={project.liveDemoUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
@@ -145,6 +173,14 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                     >
                       View Details
                     </Link>
+                    {project.detailsHref ? (
+                      <Link
+                        href={project.detailsHref}
+                        className="rounded-md bg-brand-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-brand-700"
+                      >
+                        Details
+                      </Link>
+                    ) : null}
                   </div>
                 </div>
               }

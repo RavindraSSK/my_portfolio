@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Badge from '@/components/Badge';
+import type { Metadata } from 'next';
 import Card from '@/components/Card';
 import SectionHeader from '@/components/SectionHeader';
 import { experiences } from '@/data/experience';
@@ -71,6 +72,22 @@ export default function ExperiencePage() {
           >
             Download Resume
           </Link>
+      <section>
+        <SectionHeader title="Timeline" subtitle="Key responsibilities and outcomes from recent roles." />
+        <div className="space-y-4">
+          {experiences.map((item) => (
+            <Card
+              key={`${item.role}-${item.organization}`}
+              title={`${item.role} · ${item.organization}`}
+              description={item.period}
+            >
+              <ul className="list-inside list-disc space-y-1 text-sm text-slate-600">
+                {item.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </Card>
+          ))}
         </div>
       </section>
     </div>
