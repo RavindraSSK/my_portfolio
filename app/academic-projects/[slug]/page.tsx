@@ -38,31 +38,25 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
   return (
     <div className="space-y-10">
       <header className="space-y-3">
+        <Link
+          href="/academic-projects"
+          className="inline-flex rounded-md text-sm font-semibold text-brand-700 transition hover:text-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+        >
+          ← Back to Academic Projects
+        </Link>
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">Academic Projects</p>
         <h1 className="text-4xl font-bold tracking-tight text-slate-900">{project.title}</h1>
         <p className="max-w-3xl text-slate-600">{project.summary}</p>
       </header>
 
       <section className="space-y-4">
-        <SectionHeader title="Overview" subtitle="High-level context and project scope." />
-        <p className="text-slate-700">{project.overview}</p>
+        <SectionHeader title="Overview" subtitle="Project summary and scope." />
+        <p className="text-slate-700">{project.summary}</p>
       </section>
 
-      <section className="space-y-4">
-        <SectionHeader title="Problem" subtitle="The challenge this project set out to solve." />
-        <p className="text-slate-700">{project.problem}</p>
-      </section>
-
-      <section className="space-y-4">
-        <SectionHeader title="Approach" subtitle="Methods, architecture, and implementation choices." />
-        <p className="text-slate-700">{project.approach}</p>
-      </section>
-
-      <section className="space-y-4">
-        <SectionHeader title="Results" subtitle="Outcomes and measurable impact." />
-        <p className="text-slate-700">{project.results}</p>
-
-        {project.metrics?.length ? (
+      {project.metrics?.length ? (
+        <section className="space-y-4">
+          <SectionHeader title="Key Metrics" subtitle="Selected measurements and impact signals." />
           <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {project.metrics.map((metric) => (
               <div key={metric.label} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
@@ -71,20 +65,26 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
               </div>
             ))}
           </dl>
-        ) : null}
-      </section>
+        </section>
+      ) : null}
 
       <section className="space-y-4">
-        <SectionHeader title="Tech Stack" subtitle="Primary tools and technologies used." />
+        <SectionHeader title="Tech Stack" subtitle="Core technologies and domains used." />
         <div className="flex flex-wrap gap-2">
           <Badge label={project.category} />
-          {project.tags.map((tag) => (
-            <Badge key={tag} label={tag} />
-          ))}
           {project.tech.map((item) => (
             <Badge key={item} label={item} />
           ))}
         </div>
+      </section>
+
+      <section className="space-y-4">
+        <SectionHeader title="Highlights" subtitle="Key takeaways and implementation notes." />
+        <ul className="list-inside list-disc space-y-2 text-slate-700">
+          <li>Built a clear problem-to-solution workflow for this project.</li>
+          <li>Delivered a maintainable implementation using a modern stack.</li>
+          <li>Captured actionable outcomes for future iteration and scaling.</li>
+        </ul>
       </section>
 
       {project.images?.length ? (
@@ -95,7 +95,7 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
       ) : null}
 
       <section className="space-y-4">
-        <SectionHeader title="Links" subtitle="External resources and demos." />
+        <SectionHeader title="Links" subtitle="Project repository and demo links." />
         <div className="flex flex-wrap gap-2">
           {project.links.github ? (
             <Link
@@ -117,12 +117,6 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
               Live Demo
             </Link>
           ) : null}
-          <Link
-            href="/academic-projects"
-            className="rounded-md bg-brand-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-700"
-          >
-            Back to Projects
-          </Link>
         </div>
       </section>
     </div>
