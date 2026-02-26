@@ -21,63 +21,72 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'urban-mobility-analytics',
-    title: 'Urban Mobility Analytics Platform',
-    summary: 'A full-stack analytics dashboard for city transit planners to monitor congestion, demand, and route efficiency.',
-    tags: ['Data', 'Full-Stack'],
-    tech: ['Next.js', 'PostgreSQL', 'Python', 'Mapbox'],
-    metrics: [
-      { label: 'Datasets', value: '14M+ records' },
-      { label: 'Latency', value: '< 240ms' }
+    slug: 'meditrust-xai-healthcare-risk',
+    title: 'MediTrust – Explainable AI Healthcare Risk Prediction Platform',
+    summary:
+      'Cloud-ready full-stack ML platform for cardiovascular risk prediction with SHAP explainability, fairness evaluation, CI/CD automation, and AWS deployment.',
+    tags: ['Full-Stack', 'ML', 'Data'],
+    tech: [
+      'FastAPI',
+      'React',
+      'PostgreSQL',
+      'XGBoost',
+      'SHAP',
+      'Docker',
+      'GitHub Actions',
+      'AWS'
     ],
-    githubUrl: 'https://github.com/example/urban-mobility-analytics',
-    liveDemoUrl: 'https://demo.example.com/urban-mobility-analytics',
-    detailsHref: '/academic-projects/urban-mobility-analytics'
-  },
-  {
-    slug: 'renewable-energy-forecasting',
-    title: 'Renewable Energy Forecasting Model',
-    summary: 'Machine learning pipeline for hourly solar and wind generation forecasts with weather-informed feature engineering.',
-    tags: ['ML', 'Data'],
-    tech: ['PyTorch', 'scikit-learn', 'Pandas', 'FastAPI'],
     metrics: [
-      { label: 'MAE', value: '8.9%' },
-      { label: 'Forecast Horizon', value: '72h' }
+      { label: 'ROC-AUC', value: '0.87 (XGBoost)' },
+      { label: 'F1 Improvement', value: '+12% vs baseline' }
     ],
-    githubUrl: 'https://github.com/example/renewable-forecasting',
-    detailsHref: '/academic-projects/renewable-energy-forecasting'
+    githubUrl: 'https://github.com/RavindraSSK',
+    detailsHref: '/academic-projects/meditrust-xai-healthcare-risk'
   },
   {
-    slug: 'campus-space-vision',
-    title: 'Campus Space Vision System',
-    summary: 'Computer vision prototype to estimate room occupancy and identify underutilized campus spaces for scheduling optimization.',
-    tags: ['CV', 'ML'],
-    tech: ['OpenCV', 'YOLOv8', 'Python', 'Streamlit'],
+    slug: 'campus-objects-lw-detr',
+    title: 'Campus-Objects – Multi-Class Object Detection with LW-DETR',
+    summary:
+      'End-to-end object detection pipeline using LW-DETR with a custom COCO-format campus dataset and evaluation utilities.',
+    tags: ['CV', 'ML', 'Data'],
+    tech: ['PyTorch', 'LW-DETR', 'COCO Format', 'Python','DL'],
     metrics: [
-      { label: 'Detection mAP', value: '0.87' },
-      { label: 'Pilot Rooms', value: '32' }
+      { label: 'mAP@0.5', value: '0.71 (validation)' },
+      { label: 'Dataset Size', value: '3,000+ images' }
     ],
-    githubUrl: 'https://github.com/example/campus-space-vision',
-    liveDemoUrl: 'https://demo.example.com/campus-space-vision',
-    detailsHref: '/academic-projects/campus-space-vision'
+    githubUrl: 'https://github.com/RavindraSSK',
+    detailsHref: '/academic-projects/campus-objects-lw-detr'
   },
   {
-    slug: 'research-collab-hub',
-    title: 'Research Collaboration Hub',
-    summary: 'A multi-tenant portal for lab members to share experiment logs, annotate findings, and track publication milestones.',
-    tags: ['Full-Stack'],
-    tech: ['Next.js', 'TypeScript', 'Prisma', 'Supabase'],
-    githubUrl: 'https://github.com/example/research-collab-hub',
-    detailsHref: '/academic-projects/research-collab-hub'
+    slug: 'snaptune-multimodal-music',
+    title: 'Snap Tune – AI-Powered Multi-Modal Music Recommender',
+    summary:
+      'Multi-modal AI application that converts user-uploaded images into contextual Spotify music recommendations using BLIP captioning and mood inference.',
+    tags: ['ML', 'Full-Stack'],
+    tech: [
+      'Streamlit',
+      'BLIP',
+      'DistilGPT2',
+      'Spotify API',
+      'Hugging Face Transformers'
+    ],
+    metrics: [
+      { label: 'Inference Latency', value: '< 2 seconds' }
+    ],
+    githubUrl: 'https://github.com/RavindraSSK',
+    detailsHref: '/academic-projects/snaptune-multimodal-music'
   },
   {
-    slug: 'remote-sensing-insights',
-    title: 'Remote Sensing Insights',
-    summary: 'Data analysis workflow for satellite imagery to detect vegetation trends and surface-temperature anomalies.',
-    tags: ['Data', 'CV'],
-    tech: ['Rasterio', 'NumPy', 'QGIS', 'D3.js'],
-    metrics: [{ label: 'Tiles Processed', value: '2,400+' }],
-    liveDemoUrl: 'https://demo.example.com/remote-sensing-insights',
-    detailsHref: '/academic-projects/remote-sensing-insights'
+    slug: 'tls-asbuilt-mapping-iitb',
+    title: 'As-Built Mapping Using Terrestrial Laser Scanner (TLS)',
+    summary:
+      'Geospatial research workflow involving TLS scan planning, point-cloud capture, 3D modeling, and quality control documentation at IIT Bombay.',
+    tags: ['Data'],
+    tech: ['Cyclone', 'AutoCAD', 'TLS Hardware'],
+    metrics: [
+      { label: 'Impact', value: 'Adopted as lab reference workflow' }
+    ],
+    githubUrl: 'https://github.com/RavindraSSK',
+    detailsHref: '/academic-projects/tls-asbuilt-mapping-iitb'
   }
 ];
