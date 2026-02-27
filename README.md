@@ -48,3 +48,31 @@ npm run start
 2. Build command: `npm run build`
 3. Publish directory: `.next`
 4. Use Netlify Next.js runtime/plugin as prompted.
+
+
+## Manage academic projects data
+
+Edit `data/projects.ts` to add or update cards on `/academic-projects`.
+
+Each project entry supports:
+
+- `slug`: unique URL segment used for `/academic-projects/[slug]`
+- `title`: project name
+- `summary`: short, card-friendly description
+- `category`: one of `ML`, `CV`, `Full-Stack`, `Data`
+- `tags`: contextual keywords
+- `tech`: technologies used (rendered as badges)
+- `metrics` (optional): list of `{ label, value }` stats
+- `links`: optional `{ github?, demo? }` buttons
+- `images` (optional): list of image URLs for future gallery/detail use
+
+After editing, run:
+
+```bash
+npm run dev
+```
+
+and verify:
+- filters (All/ML/CV/Full-Stack/Data)
+- search by title/tags/tech
+- project detail route `/academic-projects/[slug]`
