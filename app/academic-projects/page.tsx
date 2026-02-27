@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 interface AcademicProjectsPageProps {
   searchParams?: {
     filter?: string;
+    q?: string;
   };
 }
 
@@ -23,6 +24,15 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
     searchParams?.filter && validFilters.has(searchParams.filter as ProjectFilter)
       ? (searchParams.filter as ProjectFilter)
       : 'All';
+  const query = searchParams?.q?.trim().toLowerCase() ?? '';
+
+  const visibleProjects = projects.filter((project) => {
+    const matchesFilter = selectedFilter === 'All' ? true : project.category === selectedFilter;
+    const searchText = `${project.title} ${project.tags.join(' ')} ${project.tech.join(' ')}`.toLowerCase();
+    const matchesSearch = query ? searchText.includes(query) : true;
+
+    return matchesFilter && matchesSearch;
+  });
 
   const visibleProjects =
     selectedFilter === 'All' ? projects : projects.filter((project) => project.tags.includes(selectedFilter));
@@ -37,6 +47,39 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
       </header>
 
       <section className="space-y-4">
+        <SectionHeader title="Project Highlights" subtitle="Filter by category and search across titles, tags, and technologies." />
+
+        <form action="/academic-projects" method="get" className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          {selectedFilter !== 'All' ? <input type="hidden" name="filter" value={selectedFilter} /> : null}
+          <label htmlFor="project-search" className="sr-only">
+            Search projects
+          </label>
+          <input
+            id="project-search"
+            name="q"
+            defaultValue={searchParams?.q ?? ''}
+            placeholder="Search by title, tags, or tech"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          />
+          <button
+            type="submit"
+            className="rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          >
+            Search
+          </button>
+        </form>
+
+        <div className="flex flex-wrap gap-2">
+          {projectFilters.map((filter) => {
+            const isActive = selectedFilter === filter;
+            const href =
+              filter === 'All'
+                ? query
+                  ? `/academic-projects?q=${encodeURIComponent(query)}`
+                  : '/academic-projects'
+                : `/academic-projects?filter=${encodeURIComponent(filter)}${
+                    query ? `&q=${encodeURIComponent(query)}` : ''
+                  }`;
         <SectionHeader title="Project Highlights" subtitle="Filter by focus area and explore implementation details." />
         <div className="flex flex-wrap gap-2">
           {projectFilters.map((filter) => {
@@ -69,6 +112,7 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
               footer={
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2">
+                    <Badge label={project.category} />
                     {project.tags.map((tag) => (
                       <Badge key={tag} label={tag} />
                     ))}
@@ -78,6 +122,15 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                   </div>
 
                   {project.metrics?.length ? (
+                    <p className="text-sm text-slate-600">
+                      {project.metrics.map((metric) => `${metric.label}: ${metric.value}`).join(' · ')}
+                    </p>
+                  ) : null}
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.links.github ? (
+                      <Link
+                        href={project.links.github}
                     <dl className="grid grid-cols-2 gap-2 rounded-lg bg-slate-100 p-3">
                       {project.metrics.map((metric) => (
                         <div key={metric.label}>
@@ -100,6 +153,9 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                       </Link>
                     ) : null}
 
+                    {project.links.demo ? (
+                      <Link
+                        href={project.links.demo}
                     {project.liveDemoUrl ? (
                       <Link
                         href={project.liveDemoUrl}
@@ -111,6 +167,12 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
                       </Link>
                     ) : null}
 
+                    <Link
+                      href={`/academic-projects/${project.slug}`}
+                      className="rounded-md bg-brand-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-brand-700"
+                    >
+                      View Details
+                    </Link>
                     {project.detailsHref ? (
                       <Link
                         href={project.detailsHref}
@@ -125,6 +187,12 @@ export default function AcademicProjectsPage({ searchParams }: AcademicProjectsP
             />
           ))}
         </div>
+
+        {visibleProjects.length === 0 ? (
+          <p className="rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-600">
+            No projects match your current filter and search query.
+          </p>
+        ) : null}
       </section>
     </div>
   );
