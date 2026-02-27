@@ -5,7 +5,7 @@ import Card from '@/components/Card';
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Welcome to Alex portfolio: projects, experience, photography, and more.'
+  description: 'Welcome to Ravindra SSK portfolio: projects, experience, photography, and more.'
 };
 
 const quickLinks = [

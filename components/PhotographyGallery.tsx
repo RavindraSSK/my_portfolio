@@ -71,6 +71,17 @@ export default function PhotographyGallery({ photos }: PhotographyGalleryProps) 
         if (focusables.length === 0) return;
 
         const currentIndex = focusables.findIndex((element) => element === document.activeElement);
+
+        if (currentIndex === -1) {
+          event.preventDefault();
+          if (event.shiftKey) {
+            focusables[focusables.length - 1].focus();
+          } else {
+            focusables[0].focus();
+          }
+          return;
+        }
+
         const direction = event.shiftKey ? -1 : 1;
         const nextIndex = (currentIndex + direction + focusables.length) % focusables.length;
 
@@ -118,7 +129,7 @@ export default function PhotographyGallery({ photos }: PhotographyGalleryProps) 
         })}
       </div>
 
-      <GalleryGrid images={filteredPhotos} columnsClassName="grid-cols-2 md:grid-cols-3 xl:grid-cols-4" onImageClick={openLightbox} />
+      <GalleryGrid images={filteredPhotos} columnsClassName="grid-cols-2 md:grid-cols-3 lg:grid-cols-4" onImageClick={openLightbox} />
 
       {activePhoto ? (
         <div
