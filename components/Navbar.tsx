@@ -6,12 +6,11 @@ import { useEffect, useState } from 'react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/education', label: 'Education' },
   { href: '/academic-projects', label: 'Academic Projects' },
   { href: '/experience', label: 'Experience' },
   { href: '/photography', label: 'Photography' },
   { href: '/sports-fitness', label: 'Sports & Fitness' },
-  { href: '/design-architecture', label: 'Design/Architecture' },
+  { href: '/design-architecture', label: 'Design & Architecture' },
   { href: '/blog', label: 'Blog' },
   { href: '/resume', label: 'Resume' },
   { href: '/contact', label: 'Contact' }
